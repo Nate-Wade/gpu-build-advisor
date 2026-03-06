@@ -21,7 +21,8 @@ models/*.pkl
 models/*.joblib
 
 # Large datasets
-data/
+data/raw/
+data/processed/
 
 # Logs
 *.log
