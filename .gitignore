@@ -1,0 +1,45 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.env/
+env/
+.venv/
+
+# Environment variables
+.env
+
+# Model files
+models/*.pkl
+models/*.joblib
+
+# Large datasets
+data/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE settings
+.vscode/
+.idea/
+
+# Streamlit cache
+.streamlit/
+
+# Docker
+*.dockerignore
+
+# Temporary files
+*.tmp
+*.swp
