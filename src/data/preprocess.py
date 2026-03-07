@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 
+from src.data.load_data import load_gpu_spec_data, load_fps_data
+
 # EASY CLEANING PAIRS
 COL_UNIT_PAIRS = {'process_size': 'nm',
                   'transistors': 'million',
@@ -22,8 +24,7 @@ def load_data():
     set the column names, and return it as a DataFrame.
     """
 
-    gpu_specs = pd.read_csv("data/raw/gpu_specs_original.csv",
-                            index_col=0).to_dict(orient="index")
+    gpu_specs = load_gpu_spec_data()
     gpu_specs_df = pd.DataFrame.from_dict(gpu_specs, orient='index')
 
     # Select Columns to keep
@@ -223,7 +224,7 @@ def group_top_categories(df, column, top_n=5, new_col_name=None):
 
 
 def combine_fps_specs(df):
-    fps_df = pd.read_csv("data/raw/gpu_fps_only.csv", index_col=0)
+    fps_df = load_fps_data()
     fps_df['Avg_FPS'] = fps_df['Avg_FPS'].str.replace(
         ",", "", regex=False).astype(float)
     fps_df = fps_df.drop(columns="Min_FPS")
