@@ -15,7 +15,7 @@ def train():
         include=["float64"]).drop(columns=["Avg_FPS"]).columns.tolist()
 
     categorical_features = ["Resolution",
-                            "Setting", "memory_type", "architecture"]
+                            "Setting", "memory_type", "architecture", "Game_Name"]
 
     X = df[numeric_features_final + categorical_features]
     y = df["Avg_FPS"]
