@@ -6,8 +6,30 @@ from src.models.predict import answer_fps_query
 model = load_model()
 user_input = {
     "gpu_name": "NVIDIA GeForce RTX 3080",
-    "game": "Cyberpunk 2077",
-    "resolution": "256"
+    "Game_Name": "Fortnite Battle Royale",
+    "Resolution": "2560x1440",
+    "Setting": "Medium"
+
 }
-fps = answer_fps_query(user_input, model)
+
+user_input_game_gpu = {
+    "gpu_name": "NVIDIA GeForce RTX 3080",
+    "Game_Name": "Fortnite Battle Royale",
+
+}
+
+user_input_spec = {
+    "architecture": "Ampere",
+    "memory_size_GB": 10,
+    "Game_Name": "Cyberpunk 2077"
+}
+
+user_input_fps = {
+    "Game_Name": "Fortnite Battle Royale",
+    "Resolution": "2560x1440",
+    "Avg_FPS": "70"
+
+}
+
+fps = answer_fps_query(user_input_fps, model)
 print(f"FPS Inference: {fps}")
