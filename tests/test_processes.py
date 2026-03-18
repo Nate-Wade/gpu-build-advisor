@@ -1,7 +1,7 @@
 from src.data.preprocess import preprocess_gpu_data
 from src.models.train_model import train
 from src.data.load_data import load_model
-from src.models.predict import answer_fps_query
+from src.inference.router import answer_fps_query
 
 model = load_model()
 user_input = {
