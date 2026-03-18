@@ -4,32 +4,13 @@ from src.data.load_data import load_model
 from src.inference.router import answer_fps_query
 
 model = load_model()
-user_input = {
-    "gpu_name": "NVIDIA GeForce RTX 3080",
-    "Game_Name": "Fortnite Battle Royale",
-    "Resolution": "2560x1440",
-    "Setting": "Medium"
 
-}
+user_input_easy = {"gpu_name": "RTX 3080", "Game_Name": "Cyberpunk 2077",
+                   "Resolution": "1440p", "Setting": "Ultra"}
 
-user_input_game_gpu = {
-    "gpu_name": "NVIDIA GeForce RTX 3080",
-    "Game_Name": "Fortnite Battle Royale",
+user_input_gpu_name = {"Game_Name": "warzone",
+                       "fps": 120, "Resolution": "1080", "Setting": "high", "launch_price_USD": 700}
 
-}
 
-user_input_spec = {
-    "architecture": "Ampere",
-    "memory_size_GB": 10,
-    "Game_Name": "Cyberpunk 2077"
-}
-
-user_input_fps = {
-    "Game_Name": "Fortnite Battle Royale",
-    "Resolution": "2560x1440",
-    "Avg_FPS": "70"
-
-}
-
-fps = answer_fps_query(user_input_fps, model)
+fps = answer_fps_query(user_input_gpu_name, model)
 print(f"FPS Inference: {fps}")

@@ -5,7 +5,19 @@ from src.inference.lookup import get_gpu_specs
 
 def fill_main_context(user_input):
     """
-    Ensure Resolution and Setting exist.
+    Fill missing benchmark context fields with default values.
+
+    Parameters
+    ----------
+    user_input : dict
+        Dictionary of user supplied query values.
+
+    Returns
+    -------
+    dict
+        Copy of the input dictionary with missing Resolution and Setting
+        fields filled using DEFAULT_CONTEXT.
+
     """
     completed = user_input.copy()
 
@@ -19,6 +31,24 @@ def fill_main_context(user_input):
 
 
 def merge_inputs(specs_df, user_input):
+    """
+    Merge GPU specification values with user supplied overrides.
+
+    Parameters
+    ----------
+    specs_dict : dict
+        Dictionary of base GPU specification values, usually returned
+        from GPU lookup.
+    user_input : dict
+        Dictionary of user supplied values that should override base
+        specification values when keys overlap.
+
+    Returns
+    -------
+    pandas.DataFrame
+        One row dataframe containing merged values restricted to
+        MODEL_FEATURES.
+    """
     merged = specs_df.to_dict().copy()
     print(merged)
     print(user_input)
@@ -30,9 +60,35 @@ def merge_inputs(specs_df, user_input):
 
 def prepare_features(user_input, df):
     """
-    Build model features from user input and GPU specs.
-    """
+    Build a complete feature dictionary for model inference.
 
+    Parameters
+    ----------
+    user_input : dict
+        Dictionary of user supplied query values. May include gpu_name,
+        benchmark context fields, and manual feature overrides.
+    df : pandas.DataFrame
+        Dataframe containing GPU benchmark rows and specification data.
+
+    Returns
+    -------
+    dict
+        Dictionary containing one value for each feature listed in
+        MODEL_FEATURES.
+
+    Workflow
+    --------
+    1. Fill missing Resolution and Setting values.
+    2. If gpu_name is provided, retrieve GPU specification values.
+    3. Overlay user supplied values on top of looked up GPU values.
+    4. Keep only keys present in MODEL_FEATURES.
+
+    Notes
+    -----
+    If gpu_name is not provided, the returned feature dictionary is built
+    only from user supplied values and default benchmark context fields.
+    If a feature is still missing after merging, its value will be None.
+    """
     user_input = fill_main_context(user_input)
 
     merged = {}

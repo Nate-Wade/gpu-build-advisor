@@ -1,3 +1,7 @@
+"""
+File for defining constants and default values used across the inference process.
+"""
+
 MODEL_FEATURES = [
     "architecture",
     "process_size_nm",
@@ -31,4 +35,35 @@ MODEL_FEATURES = [
 DEFAULT_CONTEXT = {
     "Resolution": "1920x1080",
     "Setting": "Medium"
+}
+
+
+RESOLUTION_ALIASES = {
+    "1080": "1920x1080",
+    "1080p": "1920x1080",
+    "1920x1080": "1920x1080",
+
+    "1440": "2560x1440",
+    "1440p": "2560x1440",
+    "2k": "2560x1440",
+    "2560x1440": "2560x1440",
+
+    "4k": "3840x2160",
+    "2160": "3840x2160",
+    "2160p": "3840x2160",
+    "uhd": "3840x2160",
+    "3840x2160": "3840x2160"
+}
+
+SETTING_ALIASES = {
+    "low": "Low",
+    "low settings": "Low",
+    "medium": "Medium",
+    "medium settings": "Medium",
+    "high": "High",
+    "high settings": "High",
+    "ultra": "Ultra",
+    "ultra settings": "Ultra",
+    "max": "Ultra",
+    "max settings": "Ultra"
 }

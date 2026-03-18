@@ -1,6 +1,23 @@
 def get_gpu_specs(gpu_name, df):
     """
-    Retrieve GPU specifications by name.
+    Return GPU specification values for a given GPU name.
+
+    Parameters
+    ----------
+    gpu_name : str
+        Exact GPU name to look up in the dataframe index.
+    df : pandas.DataFrame
+        Dataframe containing GPU benchmark rows indexed by GPU name.
+
+    Returns
+    -------
+    dict
+        Dictionary of GPU specification values from the first matching row.
+
+    Raises
+    ------
+    ValueError
+        If the GPU name is not found in the dataframe index.
     """
     try:
         return df.loc[gpu_name].iloc[0].to_dict()
@@ -9,6 +26,24 @@ def get_gpu_specs(gpu_name, df):
 
 
 def get_observed_fps(user_input, df):
+    """
+    Return an observed FPS value from the dataset using best row match scoring.
+
+    Parameters
+    ----------
+    user_input : dict
+        Dictionary of user supplied input values such as gpu_name, Game_Name,
+        Resolution, Setting, or other model related fields.
+    df : pandas.DataFrame
+        Dataframe containing benchmark rows and an Avg_FPS column.
+
+    Returns
+    -------
+    int or None
+        Observed FPS from the best matching row if a meaningful match is found.
+        Returns None if no row matches any provided fields.
+
+    """
 
     rows = df.copy()
     rows["match_score"] = 0

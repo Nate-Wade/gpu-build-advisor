@@ -10,3 +10,4 @@ fastapi
 uvicorn
 streamlit
 boto3
+re
