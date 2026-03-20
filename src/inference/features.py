@@ -50,8 +50,6 @@ def merge_inputs(specs_df, user_input):
         MODEL_FEATURES.
     """
     merged = specs_df.to_dict().copy()
-    print(merged)
-    print(user_input)
     for key, value in user_input.items():
         merged[key] = value
 

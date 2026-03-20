@@ -44,7 +44,7 @@ def answer_fps_query(user_input, model):
 
     # Fuzzy Matching
     user_input = resolve_user_input(user_input, df)
-
+    print(f"User Input resolved: {user_input}")
     # Reverse lookup mode
     if "fps" in user_input:
         return find_gpus_from_fps(user_input, df, model)

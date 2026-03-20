@@ -60,5 +60,4 @@ def get_observed_fps(user_input, df):
 
     row = rows.sort_values("match_score", ascending=False).iloc[0]
 
-    print(row)
     return int(row["Avg_FPS"])
