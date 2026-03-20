@@ -15,9 +15,9 @@ def handle_natural_language_query(user_message: str, model) -> dict:
     3. Generate final response
     """
     structured_input = extract_query_fields(user_message)
-    print(f"Extracted structured input: {structured_input}")
+    # print(f"Extracted structured input: {structured_input}")
     structured_input = clean_user_input(structured_input)
-    print(f"Extracted cleaned structured input: {structured_input}")
+    # print(f"Extracted cleaned structured input: {structured_input}")
     backend_result = answer_fps_query(structured_input, model)
     final_response = generate_final_response(
         user_message=user_message,
