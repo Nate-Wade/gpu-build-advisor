@@ -55,7 +55,7 @@ def find_gpus_from_fps(user_input, df, model):
         results.append({
             "gpu_name": gpu_name,
             "predicted_fps": pred,
-            "price": price,
+            "max_price": price,
             "difference": abs(pred - target_fps)
         })
 
@@ -64,13 +64,13 @@ def find_gpus_from_fps(user_input, df, model):
     if max_price is not None:
         meeting_target = [
             r for r in meeting_target
-            if pd.notna(r["price"]) and r["price"] <= max_price
+            if pd.notna(r["max_price"]) and r["max_price"] <= max_price
         ]
 
     if meeting_target:
-        meeting_target.sort(key=lambda x: x["price"])
+        meeting_target.sort(key=lambda x: x["max_price"])
         return meeting_target[0]
 
     results.sort(key=lambda x: x["difference"])
 
-    return results[0]
+    return results

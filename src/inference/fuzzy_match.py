@@ -126,6 +126,8 @@ def resolve_user_input(user_input, df):
             resolved["gpu_name"], valid_gpus, cutoff=0.5)
         if matched_gpu:
             resolved["gpu_name"] = matched_gpu
+            resolved["max_price"] = int(
+                df.loc[matched_gpu, "launch_price_USD"].iloc[0])
 
     if resolved.get("Game_Name"):
         valid_games = df["Game_Name"].dropna().astype(str).unique().tolist()

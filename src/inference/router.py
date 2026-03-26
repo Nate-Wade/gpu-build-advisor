@@ -43,10 +43,12 @@ def answer_fps_query(user_input, model):
     df = load_final_data()
 
     # Fuzzy Matching
+    print(f"User Input before resolving: {user_input}")
     user_input = resolve_user_input(user_input, df)
-    # print(f"User Input resolved: {user_input}")
+    print(f"User Input resolved: {user_input}")
     # Reverse lookup mode
-    if "fps" in user_input:
+    if "fps" in user_input and not user_input.get("gpu_name"):
+        print("Performing reverse lookup...")
         return find_gpus_from_fps(user_input, df, model)
 
     # Try observed benchmark first
@@ -55,6 +57,7 @@ def answer_fps_query(user_input, model):
     if observed is not None:
         return {
             "fps": observed,
+            'max_price': user_input.get("max_price"),
             "source": "observed"
         }
 

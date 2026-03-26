@@ -1,7 +1,7 @@
-from pathlib import Path
 import pandas as pd
 import joblib
-
+from pathlib import Path
+from functools import lru_cache
 
 # Project paths
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -49,6 +49,7 @@ def load_final_data():
     return pd.read_csv(path, index_col=0)
 
 
+@lru_cache(maxsize=1)
 def load_model():
     """
     Load the trained XGBoost model.
@@ -59,4 +60,4 @@ def load_model():
         Trained model object.
     """
     path = MODEL_DIR / "xgb_gpu_fps_model.joblib"
-    return joblib.load(path)
+    return joblib.load(path, mmap_mode="r")

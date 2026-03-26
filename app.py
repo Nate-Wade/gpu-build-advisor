@@ -10,12 +10,11 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 
-def format_gpu_name(name):
+def format_settings_name(name):
     if not name:
         return "N/A"
 
-    name = name.replace("NVIDIA GeForce ", "")
-    name = name.replace("AMD Radeon ", "")
+    name = name.replace(" settings", "")
 
     return name
 
@@ -28,30 +27,30 @@ def render_metrics(result):
     gpu_value = backend.get("gpu_name") or structured.get("gpu_name", "N/A")
     resolution_value = structured.get("Resolution", "N/A")
     setting_value = structured.get("Setting", "N/A")
+    price_value = backend.get("max_price")
 
-    metric_cols = st.columns(5)
+    gpu_value_raw = backend.get(
+        "gpu_name") or structured.get("gpu_name", "N/A")
+    setting_clean = format_settings_name(setting_value)
+
+    metric_cols = st.columns(1)
+
+    with metric_cols[0]:
+        st.metric("GPU", gpu_value_raw)
+
+    metric_cols = st.columns(4)
 
     with metric_cols[0]:
         st.metric("FPS", fps_value if fps_value is not None else "N/A")
 
-    gpu_value_raw = backend.get(
-        "gpu_name") or structured.get("gpu_name", "N/A")
-    gpu_value_short = format_gpu_name(gpu_value_raw)
-
     with metric_cols[1]:
-        st.metric("GPU", gpu_value_short)
-        st.caption(gpu_value_raw)
-
-    with metric_cols[2]:
         st.metric("Resolution", resolution_value)
 
+    with metric_cols[2]:
+        st.metric("Setting", setting_clean.capitalize()
+                  if isinstance(setting_clean, str) else setting_clean)
+
     with metric_cols[3]:
-        st.metric("Setting", setting_value)
-
-    price_cols = st.columns(1)
-    price_value = backend.get("price")
-
-    with price_cols[0]:
         if price_value is not None:
             st.metric("Price", f"${int(price_value)}")
         else:
@@ -70,11 +69,11 @@ def render_history():
             st.write(result.get("final_response", "No response generated."))
             render_metrics(result)
 
-            with st.expander("Show parsed input"):
-                st.json(result.get("structured_input", {}))
+            # with st.expander("Show parsed input"):
+            #     st.json(result.get("structured_input", {}))
 
-            with st.expander("Show backend result"):
-                st.json(result.get("backend_result", {}))
+            # with st.expander("Show backend result"):
+            #     st.json(result.get("backend_result", {}))
 
 
 top_col1, top_col2 = st.columns([1, 1])
