@@ -16,10 +16,6 @@ env/
 # Environment variables
 .env
 
-# Model files
-models/*.pkl
-models/*.joblib
-
 # Large datasets
 data/raw/
 data/processed/
