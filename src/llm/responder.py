@@ -23,7 +23,7 @@ def generate_final_response(user_message, structured_input, backend_result):
                     "Do not change numeric values. "
                     "Do not invent GPUs, FPS, prices, or assumptions. "
                     "Explain the result naturally and clearly."
-                    # "Don't include observed or source or a note"
+                    "Don't include observed or sources or price"
                 ),
             },
             {

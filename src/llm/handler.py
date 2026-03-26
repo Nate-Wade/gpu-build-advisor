@@ -24,11 +24,11 @@ def handle_natural_language_query(user_message: str, model) -> dict:
     # print(f"Extracted structured input: {structured_input}")
     # structured_input = resolve_user_input(structured_input, df)
     structured_input = clean_user_input(structured_input)
-    print(f"Extracted cleaned structured input: {structured_input}")
+    # print(f"Extracted cleaned structured input: {structured_input}")
     backend_result = answer_fps_query(structured_input, model)
-    print(f"Backend result: {backend_result}")
+    # print(f"Backend result: {backend_result}")
     structured_input["max_price"] = backend_result.get("max_price")
-    print(f"Structured input with max price: {structured_input}")
+    # print(f"Structured input with max price: {structured_input}")
     t2 = time.time()
     final_response = generate_final_response(
         user_message=user_message,
@@ -37,10 +37,10 @@ def handle_natural_language_query(user_message: str, model) -> dict:
     )
     t3 = time.time()
 
-    print("extract:", t1 - t0)
-    print("backend:", t2 - t1)
-    print("final response:", t3 - t2)
-    print("total:", t3 - t0)
+    # print("extract:", t1 - t0)
+    # print("backend:", t2 - t1)
+    # print("final response:", t3 - t2)
+    # print("total:", t3 - t0)
 
     return {
         "structured_input": structured_input,
