@@ -5,7 +5,9 @@ st.set_page_config(page_title="GPU Advisor", page_icon="🎮", layout="centered"
 
 st.title("GPU Advisor")
 st.caption("Ask questions about GPU selection and FPS performance for specific games, resolutions, and settings.")
-
+st.caption(
+    "***FPS estimates are based on benchmark data and machine learning predictions. GPU prices reflect original launch prices and may differ from current market values."
+)
 if "history" not in st.session_state:
     st.session_state.history = []
 
