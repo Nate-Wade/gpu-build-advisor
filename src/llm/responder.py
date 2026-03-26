@@ -1,10 +1,10 @@
 import json
-import os
+import streamlit as st
 from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
-client = OpenAI(api_key=os.getenv("OPEN_AI_API_KEY"))
+client = OpenAI(api_key=st.secrets["OPEN_AI_API_KEY"])
 
 
 def generate_final_response(user_message, structured_input, backend_result):
